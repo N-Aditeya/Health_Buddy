@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="shortcut icon" href="./assets/images/title.png" type="image/svg+xml">
+    <title>Health-Buddy - Schedule Appointment</title>
+    
+    <style>
+        /* Professional styling for appointment page using new Sophisticated Gray & Blue Theme */
+        body {
+            background-color: #f9fafb;
+            min-height: 100vh;
+            font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .appointment-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 40px;
+            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+            border-radius: 16px;
+            box-shadow: 
+                0 10px 25px rgba(0, 0, 0, 0.12),
+                0 4px 6px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            backdrop-filter: blur(10px);
+        }
+        
+        .appointment-header {
+            font-size: 28px;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 35px;
+            position: relative;
+            padding-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+        
+        .appointment-header::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 4px;
+            width: 80px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, #2563eb, #60a5fa);
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 24px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            border: 2px solid #2563eb;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 0 rgba(37, 99, 235, 0.2);
+        }
+        
+        .back-btn:hover {
+            background-color: #2563eb;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .form-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 25px;
+            display: block;
+            letter-spacing: 0.3px;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .section-title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(180deg, #2563eb, #60a5fa);
+            border-radius: 2px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #0f172a;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: #ffffff;
+            box-sizing: border-box;
+            font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 
+                0 0 0 4px rgba(37, 99, 235, 0.1),
+                0 4px 12px rgba(37, 99, 235, 0.15);
+            transform: translateY(-1px);
+        }
+        
+        .form-group select {
+            cursor: pointer;
+            color: #6b7280;
+            background-image: linear-gradient(45deg, transparent 50%, #2563eb 50%), linear-gradient(135deg, #2563eb 50%, transparent 50%), linear-gradient(90deg, #e5e7eb, #e5e7eb);
+            background-position: calc(100% - 20px) calc(1px), calc(100% - 15px) calc(1px), calc(100% - 2.5rem) 0.5em;
+            background-size: 5px 5px, 5px 5px, 1px 1.5em;
+            background-repeat: no-repeat;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            color: white;
+            border: none;
+            padding: 16px 36px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+            font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .required {
+            color: #ef4444;
+            margin-left: 2px;
+            font-weight: 700;
+        }
+        
+        /* Professional input styling */
+        .form-group input::placeholder {
+            color: #94a3b8;
+            font-weight: 400;
+        }
+        
+        /* Subtle animation for form sections */
+        .form-section {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .appointment-container {
+                margin: 20px 16px;
+                padding: 24px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .appointment-header {
+                font-size: 22px;
+            }
+            
+            .back-btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .appointment-container {
+                padding: 20px;
+            }
+            
+            .submit-btn {
+                width: 100%;
+                padding: 14px 20px;
+            }
+        }
+    </style>
+    
+    <!-- Custom footer styling for white text with high specificity -->
+    <style>
+        /* High specificity selectors to override main CSS */
+        footer .container .card.footer .section.footer-top .footer-list .footer-list-title {
+            color: #ffffff !important;
+        }
+        
+        footer .container .card.footer .section.footer-top .footer-list ul li a.footer-link {
+            color: #ffffff !important;
+        }
+        
+        footer .container .card.footer .section.footer-top .footer-list ul li a.footer-link:hover {
+            color: #f63 !important;
+        }
+        
+        /* Additional override for any existing hover styles */
+        footer .container .card.footer .section.footer-top .footer-list ul li a.footer-link.hover-2:hover {
+            color: #f63 !important;
+        }
+    </style>
+</head>
+<body id="top">
+    <!-- Include main site header -->
+    <header class="header" data-header>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="./assets/images/logo.png" width="160" height="46" alt="Health Buddy">
+            </a>
+
+            <nav class="navbar" data-navbar>
+                <div class="navbar-top">
+                    <a href="index.html" class="logo">
+                        <img src="./assets/images/logo.png" width="160" height="46" alt="Heath Buddy">
+                    </a>
+                    <button class="nav-close-btn" aria-label="close menu" data-nav-toggler>
+                        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+                    </button>
+                </div>
+
+                <ul class="navbar-list">
+                    <li><a href="index.html" class="navbar-link hover-1" data-nav-toggler>Home</a></li>
+                    <li><a href="appointment.html" class="navbar-link" data-nav-toggler>Appointment</a></li>
+                    <li><a href="contact1.html" class="navbar-link hover-1" data-nav-toggler>Contact</a></li>
+                    <li><a href="#" class="navbar-link hover-1" id="doctors-link">Doctors Near Me</a></li>
+                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdjrOVqQk_65ywZNGShHubc1eibTaMHyE-vkvCTHBlzig0aNw/viewform?embedded=true" class="navbar-link hover-1" data-nav-toggler>Feedback</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="appointment-container">
+            <a href="index.html" class="back-btn">
+                ← Back to Home
+            </a>
+            
+            <h1 class="appointment-header">Schedule Appointment</h1>
+
+            <form action="https://formspree.io/f/mayzlqkj" method="POST">
+                <div class="form-section">
+                    <span class="section-title">Patient Details</span>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="fullName" name="Full Name" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dob">Date of Birth <span class="required">*</span></label>
+                            <input type="date" id="dob" name="Date of Birth" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="Email" placeholder="Enter your email address" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mobile">Mobile Number <span class="required">*</span></label>
+                            <input type="tel" id="mobile" name="Mobile Number" placeholder="Enter mobile number" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gender">Gender <span class="required">*</span></label>
+                            <select id="gender" name="Gender" required>
+                                <option disabled selected>Select gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Others</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="occupation">Occupation <span class="required">*</span></label>
+                            <input type="text" id="occupation" name="Occupation" placeholder="Enter your occupation" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <span class="section-title">Appointment Details</span>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="department">Department <span class="required">*</span></label>
+                            <select id="department" name="Department" required>
+                                <option disabled selected>Select Department</option>
+                                <option>Cardiology</option>
+                                <option>Neurology</option>
+                                <option>Oncology</option>
+                                <option>Orthopedics</option>
+                                <option>Pediatrics</option>
+                                <option>Radiology</option>
+                                <option>Gynecology</option>
+                                <option>Ophthalmology</option>
+                                <option>Dermatology</option>
+                                <option>Psychiatry</option>
+                                <option>Anesthesiology</option>
+                                <option>Endocrinology</option>
+                                <option>Rheumatology</option>
+                                <option>Urology</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Location <span class="required">*</span></label>
+                            <input type="text" id="location" name="Location" placeholder="Enter preferred location" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="history">Medical History</label>
+                            <input type="text" id="history" name="History" placeholder="Enter previous medical history">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="issue">Current Issue <span class="required">*</span></label>
+                            <input type="text" id="issue" name="Issue" placeholder="Describe your current health issue" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date">Preferred Date <span class="required">*</span></label>
+                            <input type="date" id="date" name="Date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="time">Preferred Time <span class="required">*</span></label>
+                            <input type="time" id="time" name="Time" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span>Submit Appointment</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="card footer">
+                <div class="section footer-top">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <img src="./assets/images/logo.png" width="160" height="46" loading="lazy" alt="Health Buddy logo">
+                        </a>
+                        <p class="footer-text">
+                            Health Buddy is a platform that provides various healthcare services including tumor detection, retina scanning, lung detection, and patient report analysis. Our mission is to help people live healthier lives.
+                        </p>
+                    </div>
+
+                    <div class="footer-list">
+                        <p class="footer-list-title">Services</p>
+                        <ul>
+                            <li><a href="tumor.html" class="footer-link hover-2">Tumor Detection</a></li>
+                            <li><a href="eye_index.html" class="footer-link hover-2">Retina Scanning</a></li>
+                            <li><a href="lung_index.html" class="footer-link hover-2">Lung Detection</a></li>
+                            <li><a href="#" class="footer-link hover-2">Patient Report Analysis</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-list">
+                        <p class="footer-list-title">Team Members</p>
+                        <ul>
+                            <li><a href="https://www.linkedin.com/in/sahithi-marri/" class="footer-link" target="_blank" rel="noopener noreferrer">Sahithi M</a></li>
+                            <li><a href="https://www.linkedin.com/in/aditeya-nelapati-141991283/" class="footer-link" target="_blank" rel="noopener noreferrer">Aditeya N</a></li>
+                            <li><a href="https://www.linkedin.com/in/hemanth-kumar-5a2bb9291/" class="footer-link" target="_blank" rel="noopener noreferrer">Hemanth Kumar S</a></li>
+                            <li><a href="https://www.linkedin.com/in/vedartham-saaket-a66340306/" class="footer-link" target="_blank" rel="noopener noreferrer">Saaket V</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./assets/js/script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
